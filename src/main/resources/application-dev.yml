@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2100/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+
+#spring:
+#  cloud:
+#    # 网关配置
+#    gateway:
+#      routes:
+#        # springboot-consumer，id是这项配置的名称，不允许重复，uri是跳转后的，lb就是使用负载均衡，此处是通过eureka来找到对应服务
+#        # predicates就是断言，path就是路径，意思为包含这个springboot2的url将转发到lb的springboot2-consumer
+#        - id: springboot2-consumer
+#          uri: lb://springboot2-consumer
+#          order: 0
+#          predicates:
+#            - Path=/springboot2/**
+#          filters:
+#            - StripPrefix=1
+#        #provider
+#        - id: springboot2-provider
+#          uri: lb://springboot2-provider
+#          order: 0
+#          predicates:
+#            - Path=/springboot2-provider/**
+#          filters:
+#            - StripPrefix=1
